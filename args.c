@@ -6,43 +6,20 @@
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:56:06 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/05 11:05:20 by nverbrug         ###   ########.fr       */
+/*   Updated: 2022/01/06 16:28:18 by naverbru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_check_arg(char c, va_list list)
-{
-	if (c == 'd' || c == 'i')
-		if (!ft_print_int(list))
-			return (0);
-	if (c == 'c')
-		if (!ft_print_char(list))
-			return (0);
-	if (c == 's')
-		if (!ft_print_str(list))
-			return (0);
-	if (c == '%')
-		ft_putchar('%');
-	if (c == 'x')
-		if (!ft_print_hex(list))
-			return (0);
-	if (c == 'p')
-		if (!ft_print_ptr(list))
-			return (0);
-
-	return (1);
-}
-
 int	ft_print_int(va_list list)
 {
-	int	arg;
+	long	arg;
 
 	arg = va_arg(list, int);
 	if (!arg)
 		return (0);
-	printf("%d\n", arg);
+	ft_putnbr_base(arg, "0123456789");
 	return (1);
 }
 
@@ -70,22 +47,23 @@ int	ft_print_str(va_list list)
 
 int	ft_print_hex(va_list list)
 {
-	int	arg;
+	long	arg;
 
 	arg = va_arg(list, int);
 	if (!arg)
 		return (0);
-	printf("%x\n", arg);
+	ft_putnbr_base(arg, "0123456789abcdef");
 	return (1);
 }
 
 int	ft_print_ptr(va_list list)
 {
-	void	*arg;
+	long	arg;
 
-	arg = va_arg(list, void *);
+	arg = va_arg(list, long);
 	if (!arg)
 		return (0);
-	printf("%s\n", arg);
+	write(1, "0x", 2);
+	ft_putnbr_base(arg, "0123456789abcdef");
 	return (1);
 }

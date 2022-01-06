@@ -6,7 +6,7 @@
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:29:33 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/05 11:05:32 by nverbrug         ###   ########.fr       */
+/*   Updated: 2022/01/06 16:22:15 by naverbru         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 //utils.c
 void	ft_putchar(char c);
 void	ft_putstr(char *str);
+int		ft_strlen(char *str);
+void	ft_putnbr_base(long arg, char *base);
 
 //args.c
 int		ft_check_arg(char c, va_list list);
