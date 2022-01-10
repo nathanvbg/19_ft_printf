@@ -6,7 +6,7 @@
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:51:59 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/06 16:23:31 by naverbru         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:21:16 by nverbrug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,15 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putstr(char *str)
+int	ft_putstr(char *str, int n)
 {
 	while (*str)
 	{
 		ft_putchar(*str);
+		n++;
 		str++;
 	}
+	return (n);
 }
 
 int	ft_strlen(char *str)
@@ -36,7 +38,7 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_putnbr_base(long value, char *base)
+void	ft_putnbr_base(long value, char *base, int *n)
 {
 	int	len_base;
 
@@ -45,12 +47,16 @@ void	ft_putnbr_base(long value, char *base)
 	{
 		value *= -1;
 		ft_putchar('-');
+		*n += 1;
 	}
 	if (value < len_base)
+	{
 		ft_putchar(base[value]);
+		*n += 1;
+	}
 	else
 	{
-		ft_putnbr_base(value / len_base, base);
-		ft_putnbr_base(value % len_base, base);
+		ft_putnbr_base(value / len_base, base, n);
+		ft_putnbr_base(value % len_base, base, n);
 	}
 }

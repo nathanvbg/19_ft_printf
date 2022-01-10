@@ -6,7 +6,7 @@
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:29:33 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/06 16:22:15 by naverbru         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:39:44 by nverbrug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,25 @@
 # include <stdarg.h>
 # include <unistd.h>
 
+//ft_printf.c
+int		ft_check_arg(char c, va_list list, int n);
+int		ft_printf(const char *fmt, ...);
+
 //utils.c
 void	ft_putchar(char c);
-void	ft_putstr(char *str);
+int 	ft_putstr(char *str, int n);
 int		ft_strlen(char *str);
-void	ft_putnbr_base(long arg, char *base);
+void	ft_putnbr_base(long arg, char *base, int *n);
 
-//args.c
-int		ft_check_arg(char c, va_list list);
-int		ft_print_int(va_list list);
-int		ft_print_char(va_list list);
-int		ft_print_str(va_list list);
-int		ft_print_ptr(va_list list);
-int		ft_print_hex(va_list list);
+//args1.c
+int		ft_print_char(va_list list, int n);
+int		ft_print_str(va_list list, int n);
+int		ft_print_ptr(va_list list, int n);
+int		ft_print_hex(va_list list, int n);
+int		ft_print_HEXA(va_list list, int n);
+
+//args2.c
+int		ft_print_int(va_list list, int n);
+int		ft_print_uint(va_list list, int n);
 
 #endif
