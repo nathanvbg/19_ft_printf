@@ -6,7 +6,7 @@
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:29:33 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/10 14:39:44 by nverbrug         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:23:16 by nverbrug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int		ft_printf(const char *fmt, ...);
 void	ft_putchar(char c);
 int 	ft_putstr(char *str, int n);
 int		ft_strlen(char *str);
-void	ft_putnbr_base(long arg, char *base, int *n);
+void	ft_putnbr_base(unsigned int arg, char *base, int *n);
+void	ft_putpointer(unsigned long long value, char *base, int *n);
 
 //args1.c
 int		ft_print_char(va_list list, int n);

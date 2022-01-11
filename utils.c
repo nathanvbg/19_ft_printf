@@ -6,7 +6,7 @@
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:51:59 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/10 14:21:16 by nverbrug         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:23:46 by nverbrug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,11 @@ int	ft_strlen(char *str)
 	return (i);
 }
 
-void	ft_putnbr_base(long value, char *base, int *n)
+void	ft_putnbr_base(unsigned int value, char *base, int *n)
 {
-	int	len_base;
+	unsigned int	len_base;
 
 	len_base = ft_strlen(base);
-	if (value < 0)
-	{
-		value *= -1;
-		ft_putchar('-');
-		*n += 1;
-	}
 	if (value < len_base)
 	{
 		ft_putchar(base[value]);
@@ -58,5 +52,22 @@ void	ft_putnbr_base(long value, char *base, int *n)
 	{
 		ft_putnbr_base(value / len_base, base, n);
 		ft_putnbr_base(value % len_base, base, n);
+	}
+}
+
+void	ft_putpointer(unsigned long long value, char *base, int *n)
+{
+	unsigned long long	len_base;
+
+	len_base = ft_strlen(base);
+	if (value < len_base)
+	{
+		ft_putchar(base[value]);
+		*n += 1;
+	}
+	else
+	{
+		ft_putpointer(value / len_base, base, n);
+		ft_putpointer(value % len_base, base, n);
 	}
 }

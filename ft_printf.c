@@ -6,7 +6,7 @@
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/05 09:21:30 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/10 17:31:59 by nverbrug         ###   ########.fr       */
+/*   Updated: 2022/01/11 15:42:26 by nverbrug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,25 @@ int	ft_check_arg(char c, va_list list, int n)
 {
 	if (c == 'd' || c == 'i')
 		return (ft_print_int(list, n));
-	if (c == 'c')
+	else if (c == 'c')
 		return (ft_print_char(list, n));
-	if (c == 's')
+	else if (c == 's')
 		return (ft_print_str(list, n));
-	if (c == 'x')
+	else if (c == 'x')
 		return (ft_print_hex(list, n));
-	if (c == 'X')
+	else if (c == 'X')
 		return (ft_print_HEXA(list, n));
-	if (c == 'p')
+	else if (c == 'p')
 		return (ft_print_ptr(list, n));
-	if (c == 'u')
+	else if (c == 'u')
 		return (ft_print_uint(list, n));
-	if (c == '%')
+	else if (c == '%')
 	{
 		ft_putchar('%');
 		return (n + 1);
 	}
-	return (1);
+	else
+		return (-1);
 }
 
 int	ft_printf(const char *fmt, ...)
@@ -63,21 +64,3 @@ int	ft_printf(const char *fmt, ...)
 	va_end(list);
 	return (n);
 }
-
-/*
-int	main()
-{
-	char	*s;
-	int		nb;
-	//void	*ptr;
-
-	nb = 1234;
-	s = NULL;
-	//ptr = &c;
-	printf("\nn1 = %d\n", ft_printf("%s all\n", s));
-	printf("\nn2 = %d\n", printf("This %p is even stranger", (void *)-2));
-	//printf("r value = %p\n", ptr);
-	//ft_printf("n value = %d\n", nb);
-	return (0);
-}
-*/
