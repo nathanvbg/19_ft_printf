@@ -5,69 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/05 09:51:59 by nverbrug          #+#    #+#             */
-/*   Updated: 2022/01/11 15:23:46 by nverbrug         ###   ########.fr       */
+/*   Created: 2020/07/31 17:42:23 by nverbrug          #+#    #+#             */
+/*   Updated: 2020/07/31 17:42:29 by nverbrug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
+void	print_c_no_point(int nb, char *x, char c, t_index *idx)
 {
-	write(1, &c, 1);
+	if (idx->minus == 0)
+		print_only_c(idx, (nb - ft_strlen(x)), c);
+	ft_putstr(x, &idx->p, ft_strlen(x));
+	if (idx->minus == 1)
+		print_only_c(idx, (nb - ft_strlen(x)), c);
 }
 
-int	ft_putstr(char *str, int n)
+void	print_space_point(int nb, char *x, t_index *idx)
 {
-	while (*str)
+	if (idx->n2 > ft_strlen(x) || idx->n2 < 0)
+		idx->n2 = ft_strlen(x);
+	if (idx->minus == 0)
+		print_only_c(idx, (nb - idx->n2), ' ');
+	ft_putstr(x, &idx->p, idx->n2);
+	if (idx->minus == 1)
+		print_only_c(idx, (nb - idx->n2), ' ');
+}
+
+void	print_only_c(t_index *idx, int nb, char c)
+{
+	if (nb > 0)
 	{
-		ft_putchar(*str);
-		n++;
-		str++;
+		while (nb > 0)
+		{
+			ft_putchar(c, &idx->p);
+			nb -= 1;
+		}
 	}
-	return (n);
 }
 
-int	ft_strlen(char *str)
+int		ft_free(char **str, int i)
 {
-	int	i;
-
-	i = 0;
-	while (str[i])
-		i++;
+	if (*str)
+	{
+		free(*str);
+		*str = NULL;
+	}
 	return (i);
-}
-
-void	ft_putnbr_base(unsigned int value, char *base, int *n)
-{
-	unsigned int	len_base;
-
-	len_base = ft_strlen(base);
-	if (value < len_base)
-	{
-		ft_putchar(base[value]);
-		*n += 1;
-	}
-	else
-	{
-		ft_putnbr_base(value / len_base, base, n);
-		ft_putnbr_base(value % len_base, base, n);
-	}
-}
-
-void	ft_putpointer(unsigned long long value, char *base, int *n)
-{
-	unsigned long long	len_base;
-
-	len_base = ft_strlen(base);
-	if (value < len_base)
-	{
-		ft_putchar(base[value]);
-		*n += 1;
-	}
-	else
-	{
-		ft_putpointer(value / len_base, base, n);
-		ft_putpointer(value % len_base, base, n);
-	}
 }

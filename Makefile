@@ -5,40 +5,37 @@
 #                                                     +:+ +:+         +:+      #
 #    By: nverbrug <nverbrug@student.s19.be>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/01/10 12:47:35 by nverbrug          #+#    #+#              #
-#    Updated: 2022/01/10 13:32:51 by nverbrug         ###   ########.fr        #
+#    Created: 2020/07/31 17:38:02 by nverbrug          #+#    #+#              #
+#    Updated: 2020/07/31 17:38:10 by nverbrug         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS	= args1.c args2.c ft_printf.c utils.c
-OBJS	= ${SRCS:.c=.o}
-INCS	= ft_printf.h
-NAME	= libftprintf.a
-LIBC	= ar rc
-LIBR	= ranlib
-CC		= gcc
-RM		= rm -f
-CFLAGS	= -Wall -Wextra -Werror
-
-.c.o:
-	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I${INCS}
-
-${NAME}: ${OBJS}
-	${LIBC} ${NAME} ${OBJS}
-	${LIBR} ${NAME}
-
-all: ${NAME}
-
+NAME = libftprintf.a
+FLAGS = -Wall -Wextra -Werror
+LFT_SRC = libft
+LIBFT = $(LFT_SRC)/libft.a
+SRCS =	ft_printf.c\
+		specifier_int.c\
+		specifier_rest.c\
+		specifier_str.c\
+		check_flags.c\
+		utils.c
+OBJS = $(SRCS:.c=.o)
+all: $(LIBFT) $(NAME)
+$(NAME): $(OBJS)
+	@echo "Compilation ft_printf..."
+	@cp $(LIBFT) $(NAME)
+	@ar rc $(NAME) $(OBJS)
+	@echo "Compilation ft_printf\t\t\033[0;32m[OK]\033[0m"
+$(LIBFT):
+	@(cd $(LFT_SRC) && $(MAKE))
 clean:
-	${RM} ${OBJS}
-
+	@rm -f $(OBJS)
+	@(cd $(LFT_SRC) && $(MAKE) $@)
+	@echo "Cleaning Objects ft_printf\t\033[0;32m[OK]\033[0m"
 fclean: clean
-	${RM} ${NAME}
-
+	@rm -f $(NAME)
+	@(cd $(LFT_SRC) && $(MAKE) $@)
+	@echo "Cleaning libftprintf.a\t\t\033[0;32m[OK]\033[0m"
 re: fclean all
-
-norm :
-	norminette -R CheckForbiddenSourceHeader */*.[ch]
-
-.PHONY: all clean fclean re .c.o norm
-
+.PHONY:all fclean re
